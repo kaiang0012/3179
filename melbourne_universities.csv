@@ -1,4 +1,4 @@
-Rank,institution,latitude,longitude,location code,location,ar score,ar rank,isr_score,isr_rank
+Rank,institution,latitude,longitude,location code,location,ar_score,ar_rank,isr_score,isr_rank
 33,The University of Melbourne,-37.7983,144.961,AU,Australia,98.6,20,99.8,30
 57,Monash University,-37.9145,145.135,AU,Australia,87.6,50,100,18
 190,RMIT University,-37.8083,144.9639,AU,Australia,36.6,234,93.4,91
