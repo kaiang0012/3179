@@ -1,0 +1,9 @@
+Rank,institution,latitude,longitude,location code,location,ar_score,ar_rank,isr_score,isr_rank
+33,The University of Melbourne,-37.7983,144.961,AU,Australia,98.6,20,99.8,30
+57,Monash University,-37.9145,145.135,AU,Australia,87.6,50,100,18
+190,RMIT University,-37.8083,144.9639,AU,Australia,36.6,234,93.4,91
+266,Deakin University,-37.8445,145.1123,AU,Australia,27.6,306,80.5,155
+316,La Trobe University,-37.7207,145.0472,AU,Australia,20.8,401,99.4,42
+297,Swinburne University of Technology,-37.8222,145.039,AU,Australia,13,501+,72.2,191
+808,Australian Catholic University,-37.8072,144.9779,AU,Australia,7,501+,49.5,295
+752,Victoria University ,-37.7937,144.8985,AU,Australia,7.3,501+,77.2,167
