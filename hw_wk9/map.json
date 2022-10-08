@@ -1,0 +1,59 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 700,
+    "height": 572,
+    "title": "Universities in Melbourne by QS World University Ranking",
+    "projection": {"type":"equirectangular"},
+    "layer": [
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/kaiang0012/3179/main/output_melbourne.json",
+          "format": {
+            "type":"topojson",
+            "feature": "Metro Partnership Boundaries_region"
+          }
+        },
+        "mark": {
+          "type": "geoshape",
+          "fill":"lightgray",
+          "stroke": "white"
+        }
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/kaiang0012/3179/main/melbourne_universities.csv"
+        },
+        "mark": {
+          "type":"circle"
+        },
+        "encoding": {
+          "longitude": {
+            "field":"longitude",
+            "type": "quantitative"
+          }, 
+          "latitude": {
+            "field":"latitude",
+            "type": "quantitative"
+          },
+          "color": { 
+            "field":"ar_score", 
+            "type":"quantitative", 
+            "title":"Academic Ratio Score", 
+            "scale": {"scheme":"reds"}
+          },
+          "size": { 
+            "field":"isr_score", 
+            "type":"quantitative", 
+            "title":"International Student Ratio Score",
+            "scale": {"domain":[0,100]}
+          },
+          "tooltip": [
+            {"field": "institution", "type": "ordinal", "title": "Institution"},
+            {"field": "Rank", "type": "quantitative", "title": "World Rank"},
+            {"field": "ar_score", "type": "quantitative", "title": "Academic Ratio Score"},
+            {"field": "isr_score", "type": "quantitative", "title": "International Student Ratio Score"}
+          ]
+        }
+      }
+    ]
+  }
