@@ -1,0 +1,100 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 400,
+  "title": "Employability of Australian University's Graduates",
+  "data":{
+    "url":"https://raw.githubusercontent.com/kaiang0012/3179/main/australia_universities.csv"
+  },
+  "encoding": {
+    "x": {
+      "field": "er_score",
+      "type": "quantitative",
+      "title": "Employer Reputation Score"
+    },
+    "y": {
+      "field": "ger_score",
+      "type": "quantitative",
+      "title": "Employment Outcome Ratio"
+    }
+  },
+  "layer": [
+    {
+      "mark": "circle",
+      "selection"  : {      
+        "state_filter"  : {        
+          "type"  :   "multi"  ,        
+          "fields"  : [  "state"  ],        
+          "bind"  :   "legend"    
+        }  
+      }, 
+      "encoding": {
+        "size": {
+          "field": "isr_score",
+          "type": "quantitative",
+          "title": "International Student Ratio",
+          "scale": {"domain":[0,100]}
+        },
+        "color": {
+          "field": "state",
+          "title": "State"
+        },
+        "opacity"  : {          
+          "condition"  : {"selection"  :   "state_filter"  ,   "value"  :   0.8  },           
+          "value"  :   0.1    
+        },
+        "tooltip": [
+          {"field": "institution", "type": "ordinal", "title": "Institution"},
+          {"field": "rank", "type": "quantitative", "title": "World Rank"},
+          {"field": "er_score", "type": "quantitative", "title": "Employer Reputation Score"},
+          {"field": "ger_score", "type": "quantitative", "title": "Employment Outcome Score"},
+          {"field": "isr_score", "type": "quantitative", "title": "International Student Ratio Score"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "baseline":"middle",
+        "dy": 18
+      },
+      "transform": [
+        {
+          "filter": "datum['institution']=='Monash University'"
+        }
+      ],
+      "encoding": {
+        "text": {"field": "institution", "type": "nominal"},
+        "opacity": {
+          "condition": {
+            "selection"  :   "state_filter"  ,   "value"  :   0.8  
+          },          
+          "value"  :   0.1
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline":"middle",
+        "dx": 23,
+        "dy": 18
+      },
+      "transform": [
+        {
+          "filter": "datum['institution']=='The University of Melbourne'"
+        }
+      ], 
+      "encoding": {
+        "text": {"field": "institution", "type": "nominal"},
+        "opacity": {
+          "condition": {
+            "selection"  :   "state_filter"  ,   "value"  :   0.8  
+          },          
+          "value"  :   0.1
+        }
+      }
+    }
+  ]
+}
