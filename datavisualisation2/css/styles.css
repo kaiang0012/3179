@@ -27,6 +27,7 @@ img{
   margin: auto;
   padding: 50px;
   padding-top: 35px;
+  min-width: 1152px;
 }
 
 .vis-container {
