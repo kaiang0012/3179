@@ -2,6 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 400,
   "height": 400,
+  "background": null,
   "title": "Academic Reputation of Australian Universities",
   "data":{
     "url":"https://raw.githubusercontent.com/kaiang0012/3179/main/australia_universities.csv"
