@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "height": 400,
+  "title": "Academic Reputation of Australian Universities",
+  "data":{
+    "url":"https://raw.githubusercontent.com/kaiang0012/3179/main/australia_universities.csv"
+  },
+  "params": [
+    {
+      "name": "sorting_selection",
+      "value": "null",
+      "bind": {
+        "input": "select",
+        "options": [
+          "ascending",
+          "descending"
+        ],
+        "labels": [
+          "Ascending",
+          "Descending"
+        ],
+        "name": "Sort By: "
+      }
+    },
+    {  
+      "name"  :  "state_highlight"  ,  
+      "select"  : {  
+        "type"  :  "point"  ,  
+        "fields"  : [  "state"  ]
+        },  
+      "bind"  :  "legend"  
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "institution",
+      "type": "nominal",
+      "title": "Institution",
+      "sort": {"field": "ar_score", "order": {"signal": "sorting_selection"}}
+    },
+    "x": {
+      "field": "ar_score",
+      "type": "quantitative",
+      "title": "Academic Reputation Score"
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State"
+    },
+    "opacity"  : {  
+      "condition"  : {  
+        "param"  :  "state_highlight"  ,  
+        "value"  :  0.8  
+      },  
+      "value"  :  0.1
+    },
+    "tooltip": [
+      {"field": "institution", "type": "ordinal", "title": "Institution"},
+      {"field": "rank", "type": "quantitative", "title": "World Rank"},
+      {"field": "ar_score", "type": "quantitative", "title": "Academic Reputation Score"}
+    ]
+  }
+}

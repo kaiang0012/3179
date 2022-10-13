@@ -1,0 +1,145 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 450,
+  "height": 366,
+  "title": "Employability of Australian University's Graduates",
+  "data":{
+    "url":"https://raw.githubusercontent.com/kaiang0012/3179/main/australia_universities.csv"
+  },
+  "params": [
+    {
+      "name": "er_slider",
+      "value": 0,
+      "bind"  : {  
+        "input"  :  "range"  ,  
+        "min"  :  0  ,  
+        "max"  :  90  ,  
+        "step"  :  10  ,  
+        "name"  :  "Employer Reputation Score: "  
+      } 
+    },
+    {
+      "name": "ger_slider",
+      "value": 0,
+      "bind"  : {  
+        "input"  :  "range"  ,  
+        "min"  :  0  ,  
+        "max"  :  90  ,  
+        "step"  :  10  ,  
+        "name"  :  "Employment Outcome Score: "  
+      } 
+    }
+  ],
+  "transform": [
+    {
+       "filter": "datum.er_score>er_slider"
+    },
+    {
+      "filter": "datum.ger_score>ger_slider"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "er_score",
+      "type": "quantitative",
+      "title": "Employer Reputation Score"
+    },
+    "y": {
+      "field": "ger_score",
+      "type": "quantitative",
+      "title": "Employment Outcome Ratio"
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "state_filter",
+          "select": {"type": "point", "fields": ["state"]},
+          "bind": "legend"
+        }
+      ],
+      "mark": "circle",
+      "encoding": {
+        "size": {
+          "field": "isr_score",
+          "type": "quantitative",
+          "title": "International Student Ratio",
+          "scale": {"domain":[0,100]}
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State",
+          "scale": {
+            "domain": [
+              "Australian Capital Territory",
+              "New South Wales",
+              "Northern Territory",
+              "Queensland",
+              "South Australia",
+              "Tasmania",
+              "Victoria",
+              "Western Australia"
+            ]
+          }
+        },
+        "opacity"  : {          
+          "condition"  : {"selection"  :   "state_filter"  ,   "value"  :   0.8  },  
+          "value"  :   0.1    
+        },
+        "tooltip": [
+          {"field": "institution", "type": "ordinal", "title": "Institution"},
+          {"field": "rank", "type": "quantitative", "title": "World Rank"},
+          {"field": "er_score", "type": "quantitative", "title": "Employer Reputation Score"},
+          {"field": "ger_score", "type": "quantitative", "title": "Employment Outcome Score"},
+          {"field": "isr_score", "type": "quantitative", "title": "International Student Ratio Score"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "baseline":"middle",
+        "dy": 18
+      },
+      "transform": [
+        {
+          "filter": "datum['institution']=='Monash University'"
+        }
+      ],
+      "encoding": {
+        "text": {"field": "institution", "type": "nominal"},
+        "opacity": {
+          "condition": {
+            "selection"  :   "state_filter"  ,   "value"  :   0.8  
+          },          
+          "value"  :   0.1
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline":"middle",
+        "dx": 23,
+        "dy": 18
+      },
+      "transform": [
+        {
+          "filter": "datum['institution']=='The University of Melbourne'"
+        }
+      ], 
+      "encoding": {
+        "text": {"field": "institution", "type": "nominal"},
+        "opacity": {
+          "condition": {
+            "selection"  :   "state_filter"  ,   "value"  :   0.8  
+          },          
+          "value"  :   0.1
+        }
+      }
+    }
+  ]
+}
