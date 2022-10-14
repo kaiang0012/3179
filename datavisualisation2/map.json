@@ -1,0 +1,117 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 515,
+  "height": 420,
+  "background": null,
+  "config": {
+    "axis": {
+      "gridColor": "black",
+      "tickColor": "black",
+      "domainColor": "black"
+    }
+  },
+  "title": "Diversity of Universities in Melbourne",
+  "projection": {"type":"equirectangular"},
+  "params": [
+    {
+      "name": "isr_slider",
+      "value": 0,
+      "bind"  : {  
+        "input"  :  "range"  ,  
+        "min"  :  49  ,  
+        "max"  :  100  ,  
+        "step"  :  1  ,  
+        "name"  :  "International Student Score: "  
+      } 
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/kaiang0012/3179/main/output_melbourne.json",
+        "format": {
+          "type":"topojson",
+          "feature": "Metro Partnership Boundaries_region"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill":"#949494",
+        "stroke": "#797979"
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/kaiang0012/3179/main/melbourne_universities.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.isr_score>=isr_slider"
+        }
+      ],
+      "mark": {
+        "type":"circle"
+      },
+      "encoding": {
+        "longitude": {
+          "field":"longitude",
+          "type": "quantitative"
+        }, 
+        "latitude": {
+          "field":"latitude",
+          "type": "quantitative"
+        },
+        "color": { 
+          "field":"ifr_score", 
+          "type":"quantitative", 
+          "title":"International Faculty Score", 
+          "scale": {"scheme":"purples"}
+        },
+        "size": { 
+          "field":"isr_score", 
+          "type":"quantitative", 
+          "title":"International Student Score",
+          "scale": {"domain":[0,100]}
+        },
+        "tooltip": [
+          {"field": "institution", "type": "ordinal", "title": "Institution"},
+          {"field": "Rank", "type": "quantitative", "title": "World Rank"},
+          {"field": "ifr_score", "type": "quantitative", "title": "International Faculty Score"},
+          {"field": "isr_score", "type": "quantitative", "title": "International Student Score"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/kaiang0012/3179/main/melbourne_universities.csv"
+      },
+      "mark": {
+        "type": "text",
+        "baseline":"middle",
+        "dy": -16
+      },
+      "transform": [
+        {
+          "filter": "datum['institution']=='Monash University' || datum['institution']=='The University of Melbourne'"
+        },
+        {
+          "filter": "datum.isr_score>=isr_slider"
+        }
+      ],
+      "encoding": {
+        "text": {
+          "field": "institution", 
+          "type": "nominal"
+        },
+        "longitude": {
+          "field":"longitude",
+          "type": "quantitative"
+        }, 
+        "latitude": {
+          "field":"latitude",
+          "type": "quantitative"
+        }
+      }
+    } 
+  ]
+}
