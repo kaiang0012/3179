@@ -15,13 +15,24 @@
   "params": [
     {
       "name": "isr_slider",
-      "value": 0,
+      "value": 49,
       "bind"  : {  
         "input"  :  "range"  ,  
         "min"  :  49  ,  
         "max"  :  100  ,  
         "step"  :  1  ,  
         "name"  :  "International Student Score: "  
+      } 
+    },
+    {
+      "name": "ifr_slider",
+      "value": 44,
+      "bind"  : {  
+        "input"  :  "range"  ,  
+        "min"  :  44  ,  
+        "max"  :  100  ,  
+        "step"  :  1  ,  
+        "name"  :  "International Faculty Score: "  
       } 
     }
   ],
@@ -47,6 +58,9 @@
       "transform": [
         {
           "filter": "datum.isr_score>=isr_slider"
+        },
+        {
+          "filter": "datum.ifr_score>=ifr_slider"
         }
       ],
       "mark": {
