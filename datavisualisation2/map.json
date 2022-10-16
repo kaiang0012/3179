@@ -110,6 +110,9 @@
         },
         {
           "filter": "datum.isr_score>=isr_slider"
+        },
+        {
+          "filter": "datum.ifr_score>=ifr_slider"
         }
       ],
       "encoding": {
